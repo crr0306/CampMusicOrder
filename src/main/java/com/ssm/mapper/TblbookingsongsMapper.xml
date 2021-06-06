@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.mapper.TblbookingsongsMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.po.Tblbookingsongs" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="colsongid" property="colsongid" jdbcType="VARCHAR" />
+    <result column="colsongname" property="colsongname" jdbcType="VARCHAR" />
+    <result column="colapptime" property="colapptime" jdbcType="VARCHAR" />
+    <result column="coltype" property="coltype" jdbcType="VARCHAR" />
+    <result column="colresult" property="colresult" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="datestr" property="datestr" jdbcType="VARCHAR" />
+    <result column="createuserid" property="createuserid" jdbcType="VARCHAR" />
+    <result column="createusername" property="createusername" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="bak1" property="bak1" jdbcType="VARCHAR" />
+    <result column="bak2" property="bak2" jdbcType="VARCHAR" />
+    <result column="bak3" property="bak3" jdbcType="VARCHAR" />
+    <result column="bak4" property="bak4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, colsongid, colsongname, colapptime, coltype, colresult, userid, username, datestr, 
+    createuserid, createusername, createdate, bak1, bak2, bak3, bak4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.po.TblbookingsongsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tblbookingsongs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tblbookingsongs
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tblbookingsongs
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ssm.po.TblbookingsongsExample" >
+    delete from tblbookingsongs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ssm.po.Tblbookingsongs" >
+    insert into tblbookingsongs (id, colsongid, colsongname, 
+      colapptime, coltype, colresult, 
+      userid, username, datestr, 
+      createuserid, createusername, createdate, 
+      bak1, bak2, bak3, bak4
+      )
+    values (#{id,jdbcType=VARCHAR}, #{colsongid,jdbcType=VARCHAR}, #{colsongname,jdbcType=VARCHAR}, 
+      #{colapptime,jdbcType=VARCHAR}, #{coltype,jdbcType=VARCHAR}, #{colresult,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{datestr,jdbcType=VARCHAR}, 
+      #{createuserid,jdbcType=VARCHAR}, #{createusername,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{bak1,jdbcType=VARCHAR}, #{bak2,jdbcType=VARCHAR}, #{bak3,jdbcType=VARCHAR}, #{bak4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.po.Tblbookingsongs" >
+    insert into tblbookingsongs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="colsongid != null" >
+        colsongid,
+      </if>
+      <if test="colsongname != null" >
+        colsongname,
+      </if>
+      <if test="colapptime != null" >
+        colapptime,
+      </if>
+      <if test="coltype != null" >
+        coltype,
+      </if>
+      <if test="colresult != null" >
+        colresult,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="datestr != null" >
+        datestr,
+      </if>
+      <if test="createuserid != null" >
+        createuserid,
+      </if>
+      <if test="createusername != null" >
+        createusername,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="bak1 != null" >
+        bak1,
+      </if>
+      <if test="bak2 != null" >
+        bak2,
+      </if>
+      <if test="bak3 != null" >
+        bak3,
+      </if>
+      <if test="bak4 != null" >
+        bak4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="colsongid != null" >
+        #{colsongid,jdbcType=VARCHAR},
+      </if>
+      <if test="colsongname != null" >
+        #{colsongname,jdbcType=VARCHAR},
+      </if>
+      <if test="colapptime != null" >
+        #{colapptime,jdbcType=VARCHAR},
+      </if>
+      <if test="coltype != null" >
+        #{coltype,jdbcType=VARCHAR},
+      </if>
+      <if test="colresult != null" >
+        #{colresult,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="datestr != null" >
+        #{datestr,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createusername != null" >
+        #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bak1 != null" >
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="bak4 != null" >
+        #{bak4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssm.po.TblbookingsongsExample" resultType="java.lang.Integer" >
+    select count(*) from tblbookingsongs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tblbookingsongs
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colsongid != null" >
+        colsongid = #{record.colsongid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colsongname != null" >
+        colsongname = #{record.colsongname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colapptime != null" >
+        colapptime = #{record.colapptime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coltype != null" >
+        coltype = #{record.coltype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colresult != null" >
+        colresult = #{record.colresult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datestr != null" >
+        datestr = #{record.datestr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null" >
+        createuserid = #{record.createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createusername != null" >
+        createusername = #{record.createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bak1 != null" >
+        bak1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak2 != null" >
+        bak2 = #{record.bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak3 != null" >
+        bak3 = #{record.bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak4 != null" >
+        bak4 = #{record.bak4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tblbookingsongs
+    set id = #{record.id,jdbcType=VARCHAR},
+      colsongid = #{record.colsongid,jdbcType=VARCHAR},
+      colsongname = #{record.colsongname,jdbcType=VARCHAR},
+      colapptime = #{record.colapptime,jdbcType=VARCHAR},
+      coltype = #{record.coltype,jdbcType=VARCHAR},
+      colresult = #{record.colresult,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      datestr = #{record.datestr,jdbcType=VARCHAR},
+      createuserid = #{record.createuserid,jdbcType=VARCHAR},
+      createusername = #{record.createusername,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      bak1 = #{record.bak1,jdbcType=VARCHAR},
+      bak2 = #{record.bak2,jdbcType=VARCHAR},
+      bak3 = #{record.bak3,jdbcType=VARCHAR},
+      bak4 = #{record.bak4,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.po.Tblbookingsongs" >
+    update tblbookingsongs
+    <set >
+      <if test="colsongid != null" >
+        colsongid = #{colsongid,jdbcType=VARCHAR},
+      </if>
+      <if test="colsongname != null" >
+        colsongname = #{colsongname,jdbcType=VARCHAR},
+      </if>
+      <if test="colapptime != null" >
+        colapptime = #{colapptime,jdbcType=VARCHAR},
+      </if>
+      <if test="coltype != null" >
+        coltype = #{coltype,jdbcType=VARCHAR},
+      </if>
+      <if test="colresult != null" >
+        colresult = #{colresult,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="datestr != null" >
+        datestr = #{datestr,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        createuserid = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createusername != null" >
+        createusername = #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bak1 != null" >
+        bak1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        bak2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        bak3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="bak4 != null" >
+        bak4 = #{bak4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.po.Tblbookingsongs" >
+    update tblbookingsongs
+    set colsongid = #{colsongid,jdbcType=VARCHAR},
+      colsongname = #{colsongname,jdbcType=VARCHAR},
+      colapptime = #{colapptime,jdbcType=VARCHAR},
+      coltype = #{coltype,jdbcType=VARCHAR},
+      colresult = #{colresult,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      datestr = #{datestr,jdbcType=VARCHAR},
+      createuserid = #{createuserid,jdbcType=VARCHAR},
+      createusername = #{createusername,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      bak1 = #{bak1,jdbcType=VARCHAR},
+      bak2 = #{bak2,jdbcType=VARCHAR},
+      bak3 = #{bak3,jdbcType=VARCHAR},
+      bak4 = #{bak4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+    <select id="selectByExamplePage" resultMap="BaseResultMap" parameterType="com.ssm.po.TblbookingsongsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tblbookingsongs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+     limit #{pageStart,jdbcType=INTEGER}  ,  #{pageSize,jdbcType=INTEGER}
+  </select>
+  
+</mapper>

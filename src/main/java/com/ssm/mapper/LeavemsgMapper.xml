@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.mapper.LeavemsgMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.po.Leavemsg" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="createuserid" property="createuserid" jdbcType="VARCHAR" />
+    <result column="createusername" property="createusername" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="retitle" property="retitle" jdbcType="VARCHAR" />
+    <result column="recontent" property="recontent" jdbcType="VARCHAR" />
+    <result column="reuserid" property="reuserid" jdbcType="VARCHAR" />
+    <result column="reusername" property="reusername" jdbcType="VARCHAR" />
+    <result column="recreatedate" property="recreatedate" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="typename" property="typename" jdbcType="VARCHAR" />
+    <result column="bak1" property="bak1" jdbcType="VARCHAR" />
+    <result column="bak2" property="bak2" jdbcType="VARCHAR" />
+    <result column="bak3" property="bak3" jdbcType="VARCHAR" />
+    <result column="bak4" property="bak4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, content, createuserid, createusername, createdate, retitle, recontent, 
+    reuserid, reusername, recreatedate, remark, type, typename, bak1, bak2, bak3, bak4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.po.LeavemsgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from leavemsg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from leavemsg
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from leavemsg
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ssm.po.LeavemsgExample" >
+    delete from leavemsg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ssm.po.Leavemsg" >
+    insert into leavemsg (id, title, content, 
+      createuserid, createusername, createdate, 
+      retitle, recontent, reuserid, 
+      reusername, recreatedate, remark, 
+      type, typename, bak1, 
+      bak2, bak3, bak4)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{createuserid,jdbcType=VARCHAR}, #{createusername,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{retitle,jdbcType=VARCHAR}, #{recontent,jdbcType=VARCHAR}, #{reuserid,jdbcType=VARCHAR}, 
+      #{reusername,jdbcType=VARCHAR}, #{recreatedate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{typename,jdbcType=VARCHAR}, #{bak1,jdbcType=VARCHAR}, 
+      #{bak2,jdbcType=VARCHAR}, #{bak3,jdbcType=VARCHAR}, #{bak4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.po.Leavemsg" >
+    insert into leavemsg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="createuserid != null" >
+        createuserid,
+      </if>
+      <if test="createusername != null" >
+        createusername,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="retitle != null" >
+        retitle,
+      </if>
+      <if test="recontent != null" >
+        recontent,
+      </if>
+      <if test="reuserid != null" >
+        reuserid,
+      </if>
+      <if test="reusername != null" >
+        reusername,
+      </if>
+      <if test="recreatedate != null" >
+        recreatedate,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="typename != null" >
+        typename,
+      </if>
+      <if test="bak1 != null" >
+        bak1,
+      </if>
+      <if test="bak2 != null" >
+        bak2,
+      </if>
+      <if test="bak3 != null" >
+        bak3,
+      </if>
+      <if test="bak4 != null" >
+        bak4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createusername != null" >
+        #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retitle != null" >
+        #{retitle,jdbcType=VARCHAR},
+      </if>
+      <if test="recontent != null" >
+        #{recontent,jdbcType=VARCHAR},
+      </if>
+      <if test="reuserid != null" >
+        #{reuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="reusername != null" >
+        #{reusername,jdbcType=VARCHAR},
+      </if>
+      <if test="recreatedate != null" >
+        #{recreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="typename != null" >
+        #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="bak4 != null" >
+        #{bak4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssm.po.LeavemsgExample" resultType="java.lang.Integer" >
+    select count(*) from leavemsg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update leavemsg
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null" >
+        createuserid = #{record.createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createusername != null" >
+        createusername = #{record.createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.retitle != null" >
+        retitle = #{record.retitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recontent != null" >
+        recontent = #{record.recontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reuserid != null" >
+        reuserid = #{record.reuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reusername != null" >
+        reusername = #{record.reusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recreatedate != null" >
+        recreatedate = #{record.recreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typename != null" >
+        typename = #{record.typename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak1 != null" >
+        bak1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak2 != null" >
+        bak2 = #{record.bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak3 != null" >
+        bak3 = #{record.bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak4 != null" >
+        bak4 = #{record.bak4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update leavemsg
+    set id = #{record.id,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      createuserid = #{record.createuserid,jdbcType=VARCHAR},
+      createusername = #{record.createusername,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      retitle = #{record.retitle,jdbcType=VARCHAR},
+      recontent = #{record.recontent,jdbcType=VARCHAR},
+      reuserid = #{record.reuserid,jdbcType=VARCHAR},
+      reusername = #{record.reusername,jdbcType=VARCHAR},
+      recreatedate = #{record.recreatedate,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      typename = #{record.typename,jdbcType=VARCHAR},
+      bak1 = #{record.bak1,jdbcType=VARCHAR},
+      bak2 = #{record.bak2,jdbcType=VARCHAR},
+      bak3 = #{record.bak3,jdbcType=VARCHAR},
+      bak4 = #{record.bak4,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.po.Leavemsg" >
+    update leavemsg
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        createuserid = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createusername != null" >
+        createusername = #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retitle != null" >
+        retitle = #{retitle,jdbcType=VARCHAR},
+      </if>
+      <if test="recontent != null" >
+        recontent = #{recontent,jdbcType=VARCHAR},
+      </if>
+      <if test="reuserid != null" >
+        reuserid = #{reuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="reusername != null" >
+        reusername = #{reusername,jdbcType=VARCHAR},
+      </if>
+      <if test="recreatedate != null" >
+        recreatedate = #{recreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="typename != null" >
+        typename = #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        bak1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        bak2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        bak3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="bak4 != null" >
+        bak4 = #{bak4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.po.Leavemsg" >
+    update leavemsg
+    set title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      createuserid = #{createuserid,jdbcType=VARCHAR},
+      createusername = #{createusername,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      retitle = #{retitle,jdbcType=VARCHAR},
+      recontent = #{recontent,jdbcType=VARCHAR},
+      reuserid = #{reuserid,jdbcType=VARCHAR},
+      reusername = #{reusername,jdbcType=VARCHAR},
+      recreatedate = #{recreatedate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      typename = #{typename,jdbcType=VARCHAR},
+      bak1 = #{bak1,jdbcType=VARCHAR},
+      bak2 = #{bak2,jdbcType=VARCHAR},
+      bak3 = #{bak3,jdbcType=VARCHAR},
+      bak4 = #{bak4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+   <select id="selectByExamplePage" resultMap="BaseResultMap" parameterType="com.ssm.po.LeavemsgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from leavemsg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+     limit #{pageStart,jdbcType=INTEGER}  ,  #{pageSize,jdbcType=INTEGER}
+  </select>
+</mapper>
