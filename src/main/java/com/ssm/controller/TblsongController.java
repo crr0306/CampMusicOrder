@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssm.common.Page;
@@ -47,11 +48,39 @@ public class TblsongController {
 		example.setPageSize(page.getSize());
 		
 		List<Tblsong> list = tblsongService.selectByExamplePage(example);
-		
 		model.addAttribute("list", list);
 		model.addAttribute("colname", colname);
 		model.addAttribute("page", page);
 		return "tblsonglist";
+	}
+
+
+	@RequestMapping(value = "/getListByTypeId",method = RequestMethod.POST , produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String getListByTypeId(HttpServletRequest request, Model model) {
+		String songTypeId = request.getParameter("songTypeId");
+
+		TblsongExample example = new TblsongExample();
+		example.setOrderByClause(" createdate desc ");
+		example.createCriteria();
+
+
+		if(songTypeId!=null&&!songTypeId.equals("")){
+			example.getOredCriteria().get(0).andBak1EqualTo(songTypeId);
+		}
+		List<Tblsong> list = tblsongService.selectByExample(example);
+
+		model.addAttribute("list", list);
+		request.getSession().setAttribute("list",list);
+
+		String options="";
+		for(Tblsong tblsong:list){
+			options+="<option value="+tblsong.getId()+">"+tblsong.getColname()+"</option>";
+		}
+		if("".equals(options)){
+			options+="<option value=''>此类别无数据</option>";
+		}
+		return options;
 	}
 
 	@RequestMapping(value = "/toAdd")
@@ -60,11 +89,7 @@ public class TblsongController {
 
 		SongTypeExample example = new SongTypeExample();
      	example.setOrderByClause(" createdate desc ");
-		int count = tblsongTypeService.countByExample(example);
-		Page page = new Page(count, "");
-		example.setPageStart(page.getStart());
-		example.setPageSize(count);
-		List<SongType> list = tblsongTypeService.selectByExamplePage(example);
+		List<SongType> list = tblsongTypeService.selectByExample(example);
 		model.addAttribute("songTypelist", list);
 		return "tblsongadd";
 	}
@@ -86,11 +111,8 @@ public class TblsongController {
 		//类别
 		SongTypeExample example = new SongTypeExample();
 		example.setOrderByClause(" createdate desc ");
-		int count = tblsongTypeService.countByExample(example);
-		Page page = new Page(count, "");
-		example.setPageStart(page.getStart());
-		example.setPageSize(count);
-		List<SongType> list = tblsongTypeService.selectByExamplePage(example);
+		List<SongType> list = tblsongTypeService.selectByExample(example);
+
 		List<SongType> newList=new ArrayList<>();
 		for(SongType data:list){
 			if(data.getId().equals(Tblsong.getBak1())){

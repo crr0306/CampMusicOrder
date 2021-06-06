@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ssm.po.*;
+import com.ssm.service.TblsongTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssm.common.Page;
-import com.ssm.po.Tblbookingsongs;
-import com.ssm.po.TblbookingsongsExample;
-import com.ssm.po.Tblsong;
-import com.ssm.po.TblsongExample;
-import com.ssm.po.User;
 import com.ssm.service.TblbookingsongsService;
 import com.ssm.service.TblsongService;
 
@@ -26,7 +23,9 @@ public class TblbookingsongsController {
     private TblbookingsongsService tblbookingsongsService;  
 	
 	@Autowired
-    private TblsongService tblsongService;  
+    private TblsongService tblsongService;
+	@Autowired
+	private TblsongTypeService tblsongTypeService;
 	
 	
 	@RequestMapping(value = "/list")
@@ -95,11 +94,17 @@ public class TblbookingsongsController {
 		TblsongExample example = new TblsongExample();
 		example.setOrderByClause(" createdate desc ");
 		example.createCriteria();
-		
 		List<Tblsong> list = tblsongService.selectByExample(example);
-		
 		model.addAttribute("list", list);
+
+
+		SongTypeExample songTypeExample = new SongTypeExample();
+		example.setOrderByClause(" createdate desc ");
+		example.createCriteria();
+		List<SongType> songTypelist = tblsongTypeService.selectByExample(songTypeExample);
 		
+		model.addAttribute("songTypelist", songTypelist);
+
 		return "tblbookingsongsadd";
 	}
 	

@@ -1,5 +1,8 @@
+<%@ page import="com.ssm.po.Tblsong" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
             <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
             <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,6 +21,34 @@ function back(){
 	return false;
 }
 
+function change(){
+
+
+    var songTypeId = $("#songTypeId").val();
+    $("#colsongid").empty();
+
+    $.ajax({
+        url:"../tblsong/getListByTypeId",
+        type:"post",
+        data:{
+            songTypeId:songTypeId,
+        },
+        success:function(data){
+            // console.log(data.responseText)
+            $("#colsongid").append(data.responseText);
+            return false ;
+        },
+        error:function(data){
+            // alert("系统错误");
+            // console.log(data.responseText)
+            $("#colsongid").append(data.responseText);
+            return false ;
+        }
+    });
+
+
+    return false;
+}
 function save(){
 
 	var colsongid = $("#colsongid").val();
@@ -80,6 +111,11 @@ function save(){
 }
 
 </script>
+    <%
+        List<Tblsong> songlist1 = new ArrayList<Tblsong>();
+        songlist1=(List)request.getSession().getAttribute("list");
+        System.out.println("songlist:"+songlist1);
+    %>
 </head>
 <body class="withvernav">
 <div class="bodywrapper">
@@ -95,16 +131,24 @@ function save(){
                     </div><!--contenttitle-->
                     
 					<form class="stdform stdform2" method="post" action="">
-					
-					
+                        <p>
+                            <label>歌曲类型</label>
+                            <span class="field">
+                            <select  name="songTypeId" id="songTypeId" onchange="change()">
+                                <option value="">请选择</option>
+                            	<c:forEach items="${songTypelist}" var="o">
+                                    <option value="${o.id }" >${o.name }</option>
+                                </c:forEach>
+                            </select>
+                            </span>
+                        </p>
+
+
 					<p>
                         	<label>歌曲</label>
                             <span class="field">
-                            <select  name="colsongid" id="colsongid">
+                            <select  name="colsongid" id="colsongid" >
                             	<option value="">请选择</option>
-                            	<c:forEach items="${list}" var="o2">
-                                <option value="${o2.id }" <c:if test="${o.colsongid eq o2.id}">selected="selected"</c:if>>${o2.colname }</option>
-                                </c:forEach>
                             </select>
                             </span>
                         </p>
