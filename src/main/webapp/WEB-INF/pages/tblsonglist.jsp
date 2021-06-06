@@ -87,9 +87,11 @@ function select(){
                         <col class="con0" />
                         <col class="con0" />
                         <col class="con0" />
+                        <col class="con0" />
                     </colgroup>
                     <thead>
                         <tr>
+                            <th class="head0" width="100px;">歌曲类别</th>
 						    <th class="head0" width="100px;">歌曲名称</th>
 						    <th class="head0" width="100px;">演唱者</th>
 						    <th class="head0" width="100px;">作词</th>
@@ -101,6 +103,7 @@ function select(){
                     <tbody>
                     <c:forEach items="${list}" var="o">
                         <tr class="gradeX">
+                            <td>${o.bak2 }</td>
                         	<td>${o.colname }</td>
                         	<td>${o.colsinger }</td>
                         	<td>${o.colcomposingwords }</td>

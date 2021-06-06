@@ -1,5 +1,6 @@
 package com.ssm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,8 +72,8 @@ public class TblsongController {
 	@ResponseBody
 	@RequestMapping(value = "/add")
 	public String add(HttpServletRequest request, Model model) {
-		tblsongService.add(request);
-		return "ok";
+
+		return tblsongService.add(request);
 	}
 	
 	
@@ -81,6 +82,24 @@ public class TblsongController {
 		String id = request.getParameter("id");
 		Tblsong Tblsong = tblsongService.getTblsongById(id);
 		model.addAttribute("o", Tblsong);
+
+		//类别
+		SongTypeExample example = new SongTypeExample();
+		example.setOrderByClause(" createdate desc ");
+		int count = tblsongTypeService.countByExample(example);
+		Page page = new Page(count, "");
+		example.setPageStart(page.getStart());
+		example.setPageSize(count);
+		List<SongType> list = tblsongTypeService.selectByExamplePage(example);
+		List<SongType> newList=new ArrayList<>();
+		for(SongType data:list){
+			if(data.getId().equals(Tblsong.getBak1())){
+
+			}else {
+				newList.add(data);
+			}
+		}
+		model.addAttribute("songTypelist", newList);
 		
 		return "tblsongupdate";
 	}
@@ -88,8 +107,8 @@ public class TblsongController {
 	@ResponseBody
 	@RequestMapping(value = "/update")
 	public String update(HttpServletRequest request, Model model) {
-		tblsongService.updateByPrimaryKeySelective(request);
-		return "ok";
+
+		return tblsongService.updateByPrimaryKeySelective(request);
 	}
 	
 	@ResponseBody

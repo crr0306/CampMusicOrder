@@ -87,10 +87,12 @@ function select(){
                         <col class="con0" />
                         <col class="con0" />
                         <col class="con0" />
+                        <col class="con0" />
                     </colgroup>
                     <thead>
                         <tr>
 						   <!--  <th class="head0" width="100px;">歌曲ID</th> -->
+                            <th class="head0" width="100px;">歌曲类型</th>
 						    <th class="head0" width="100px;">歌曲名称</th>
 						    
 						    
@@ -108,6 +110,7 @@ function select(){
                     <c:forEach items="${list}" var="o">
                         <tr class="gradeX">
                         	<%-- <td>${o.colsongid }</td> --%>
+                                <td>${o.bak2 }</td>
                         	<td>${o.colsongname }</td>
                         	
                         	 <td>${o.createusername }</td>

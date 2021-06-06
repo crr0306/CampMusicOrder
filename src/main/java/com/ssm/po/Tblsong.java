@@ -27,7 +27,7 @@ public class Tblsong {
 
     private Date createdate;
 
-    private String bak1;
+    private String bak1;//typeid
 
     private String bak2;
 

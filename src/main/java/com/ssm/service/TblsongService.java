@@ -16,10 +16,10 @@ public interface TblsongService {
 	
 	public int deleteByPrimaryKey(String id);
 	 
-	public void add(HttpServletRequest request);
+	public String add(HttpServletRequest request);
 	
 	public Tblsong getTblsongById(String id); 
 	
-	public void updateByPrimaryKeySelective(HttpServletRequest request);
+	public String updateByPrimaryKeySelective(HttpServletRequest request);
 	
 }

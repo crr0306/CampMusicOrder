@@ -68,7 +68,12 @@ function save(){
 				alert("保存成功");
 				window.location.href = ctx+"/tblsong/list.html";
 				return false;
-			}else{
+			}
+           else if("fail"==data){
+                alert("保存失败,歌曲类型错误");
+
+                return false;
+            }else{
 				alert("保存失败");
 				return false ;
 			}
@@ -108,7 +113,7 @@ function save(){
                                 </c:forEach>
                             </select>
                             </span>
-                            </span>
+
                         </p>
                     	<p>
                         	<label>歌曲名称</label>
