@@ -264,7 +264,7 @@ public class SongTypeExample {
             return (Criteria) this;
         }
         public Criteria andColnameLike(String value) {
-            addCriterion("colname like", value, "colname");
+            addCriterion("name like", value, "colname");
             return (Criteria) this;
         }
     }

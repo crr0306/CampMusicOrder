@@ -28,4 +28,6 @@ public interface SongTypeMapper {
     int updateByExample(@Param("record") SongType record, @Param("example") SongTypeExample example);
 
     List<SongType> selectByExamplePage(SongTypeExample example);
+
+    int updateByPrimaryKeySelective(SongType record);
 }

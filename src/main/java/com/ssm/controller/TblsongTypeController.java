@@ -3,9 +3,6 @@ package com.ssm.controller;
 import com.ssm.common.Page;
 import com.ssm.po.SongType;
 import com.ssm.po.SongTypeExample;
-import com.ssm.po.Tblsong;
-import com.ssm.po.TblsongExample;
-import com.ssm.service.TblsongService;
 import com.ssm.service.TblsongTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,7 +43,7 @@ public class TblsongTypeController {
 		model.addAttribute("list", list);
 		model.addAttribute("colname", colname);
 		model.addAttribute("page", page);
-		return "tblsonglist";
+		return "tblsongtypelist";
 	}
 
 	@RequestMapping(value = "/toAdd")
@@ -68,7 +65,7 @@ public class TblsongTypeController {
 		SongType songType = tblsongTypeService.getTblsongTypeById(id);
 		model.addAttribute("o", songType);
 		
-		return "tblsongupdate";
+		return "tblsongtypeupdate";
 	}
 
 	@ResponseBody

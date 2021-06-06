@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.ssm.po.SongType">
     <result column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -64,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name
+    id, name, createdate
   </sql>
   <select id="selectByExample" parameterType="com.ssm.po.SongTypeExample" resultMap="BaseResultMap">
     select
@@ -87,13 +88,11 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from songtype
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
   <insert id="insert" parameterType="com.ssm.po.SongType">
-    insert into songtype (id, name)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
+    insert into songtype (id, name, createdate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ssm.po.SongType">
     insert into songtype
@@ -104,6 +103,9 @@
       <if test="name != null">
         name,
       </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -112,14 +114,12 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ssm.po.SongTypeExample" resultType="java.lang.Integer">
-    select count(*) from songtype
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
+
   <update id="updateByExampleSelective" parameterType="map">
     update songtype
     <set>
@@ -129,6 +129,9 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -137,32 +140,62 @@
   <update id="updateByExample" parameterType="map">
     update songtype
     set id = #{record.id,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR}
+      name = #{record.name,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
 
-  <select id="selectByExamplePage" resultMap="BaseResultMap" parameterType="com.ssm.po.SongTypeExample" >
+
+
+  <select id="countByExample" parameterType="com.ssm.po.SongTypeExample" resultType="java.lang.Integer">
+    select count(*) from songtype
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+
+
+
+  <select id="selectByExamplePage" parameterType="com.ssm.po.SongTypeExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from songtype
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
     limit #{pageStart,jdbcType=INTEGER}  ,  #{pageSize,jdbcType=INTEGER}
   </select>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from songtype
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from songtype
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.po.SongType" >
+    update songtype
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
 </mapper>

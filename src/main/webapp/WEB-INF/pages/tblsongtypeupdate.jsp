@@ -14,27 +14,25 @@ var ctx = '${pageContext.request.contextPath}';
 <title></title>
 <script type="text/javascript">
 function back(){
-	window.location.href = ctx+"/tblsong/list.html";
+	window.location.href = ctx+"/tblsongType/list.html";
 	return false;
 }
 
 function save(){
-
+	var id = $("#id").val();
 	var colname = $("#colname").val();
 
-
 	if(colname==""){
-		alert("请输入歌曲名称");
+		alert("请输入歌曲分类名称");
 		return false ;
 	}
 
-	
 	$.ajax({
-		url:"../tblsongType/add",
+		url:"../tblsongType/update",
 		type:"post",
 		data:{
-			colname:colname,
-
+			id:id,
+			name:colname,
 		},
 		success:function(data){
 			if("ok"==data){
@@ -65,18 +63,19 @@ function save(){
         	<div id="basicform" class="subcontent">
 					<div class="contenttitle2">
                         <h3>
-	                       歌曲分类管理新增
+	                      歌曲类型管理修改
+	                       <input type="hidden" value="${o.id }" name="id" id="id" />  
                 		</h3>
                     </div><!--contenttitle-->
                     
 					<form class="stdform stdform2" method="post" action="">
 					
+					
                     	<p>
                         	<label>歌曲类型名称</label>
-                            <span class="field"><input type="text" name="colname" id="colname" class="longinput" /></span>
+                            <span class="field"><input type="text" value="${o.name }"  name="colname" id="colname" class="longinput" /></span>
                         </p>
 
-                        
                         <p class="stdformbutton">
                         	<button class="submit radius2" onclick="return save()" >提交</button>
                             <input type="button" class="button" onclick="return back()" value="返回" />

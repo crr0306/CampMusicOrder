@@ -45,7 +45,7 @@ public class TblsongController {
 		model.addAttribute("list", list);
 		model.addAttribute("colname", colname);
 		model.addAttribute("page", page);
-		return "tblsongTypelist";
+		return "tblsonglist";
 	}
 
 	@RequestMapping(value = "/toAdd")

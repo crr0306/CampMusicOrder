@@ -57,15 +57,13 @@ public class TblsongTypeServiceImpl implements TblsongTypeService {
 	public void updateByPrimaryKeySelective(HttpServletRequest request) {
 		String id = request.getParameter("id");
 		
-	    String colname = request.getParameter("colname");
-	    String colsinger = request.getParameter("colsinger");
-	    String colcomposingwords = request.getParameter("colcomposingwords");
-	    String colproductioncompany = request.getParameter("colproductioncompany");
-	    String collyric = request.getParameter("collyric");
+	    String name = request.getParameter("name");
+
 	    
-	    SongType tblsong = new SongType();
-	    tblsong.setId(id);
-	    
+	    SongType songType = new SongType();
+		songType.setId(id);
+		songType.setName(name);
+		songTypeMapper.updateByPrimaryKeySelective(songType);
 
 
 

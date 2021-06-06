@@ -19,17 +19,17 @@ function toAdd(){
 }
 
  function toUpdate(id){
-	window.location.href = ctx+"/tblsong/toUpdate.html?id="+id;
+	window.location.href = ctx+"/tblsongType/toUpdate.html?id="+id;
 	return false;
 }
 
 function toDetail(id){
-	window.location.href = "../tblsong/toDetail.html?id="+id;
+	window.location.href = "../tblsongType/toDetail.html?id="+id;
 }
 
 function toDelete(id){
 	$.ajax({
-		url:"../tblsong/toDelete.html",
+		url:"../tblsongType/toDelete.html",
 		type:"post",
 		data:{id:id},
 		success:function(data){
@@ -55,7 +55,7 @@ function select(){
     <%@ include file="head.jsp" %>
     <%@ include file="left.jsp" %>
         
-    <form method="post" action="${pageContext.request.contextPath}/tblsong/list.html" id="sForm">
+    <form method="post" action="${pageContext.request.contextPath}/tblsongType/list.html" id="sForm">
     <div class="centercontent tables">
     
        <div id="contentwrapper" class="contentwrapper">
@@ -87,7 +87,7 @@ function select(){
                     </colgroup>
                     <thead>
                         <tr>
-						    <th class="head0" width="100px;">歌曲分类名称</th>
+						    <th class="head0" width="100px;">类型名字</th>
 
 						    <th class="head0" width="100px;">操作</th>
                         </tr>
@@ -95,7 +95,7 @@ function select(){
                     <tbody>
                     <c:forEach items="${list}" var="o">
                         <tr class="gradeX">
-                        	<td>${o.colname }</td>
+                        	<td>${o.name }</td>
                             <td>
                             <button  onclick="return toUpdate('${o.id}')">修改</button>
                             <button  onclick="return toDelete('${o.id}')" >删除</button>
