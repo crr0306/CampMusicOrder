@@ -26,6 +26,11 @@ function save(){
 	var colproductioncompany = $("#colproductioncompany").val();
 	var collyric = $("#collyric").val();
 
+	var songTypeId=$("#songTypeId").val();
+    if(songTypeId==""){
+        alert("请选择歌曲类型");
+        return false ;
+    }
 	if(colname==""){
 		alert("请输入歌曲名称");
 		return false ;
@@ -56,6 +61,7 @@ function save(){
 			colcomposingwords:colcomposingwords,
 			colproductioncompany:colproductioncompany,
 			collyric:collyric,
+            songTypeId:songTypeId,
 		},
 		success:function(data){
 			if("ok"==data){
@@ -91,7 +97,19 @@ function save(){
                     </div><!--contenttitle-->
                     
 					<form class="stdform stdform2" method="post" action="">
-					
+                        <p>
+                            <label>歌曲类型</label>
+
+                            <span class="field">
+                            <select name="songTypeId" id="songTypeId">
+                            	<option value="">请选择</option>
+                            	<c:forEach items="${songTypelist}" var="o2">
+                                    <option value="${o2.id }" >${o2.name }</option>
+                                </c:forEach>
+                            </select>
+                            </span>
+                            </span>
+                        </p>
                     	<p>
                         	<label>歌曲名称</label>
                             <span class="field"><input type="text" name="colname" id="colname" class="longinput" /></span>

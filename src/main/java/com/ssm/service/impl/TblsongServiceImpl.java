@@ -40,6 +40,7 @@ public class TblsongServiceImpl implements TblsongService{
 	    String colcomposingwords = request.getParameter("colcomposingwords");
 	    String colproductioncompany = request.getParameter("colproductioncompany");
 	    String collyric = request.getParameter("collyric");
+		String songTypeId = request.getParameter("songTypeId");
 	    
 	    Tblsong tblsong = new Tblsong();
 	    tblsong.setId(id);

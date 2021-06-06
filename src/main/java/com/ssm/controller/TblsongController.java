@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ssm.po.SongType;
+import com.ssm.po.SongTypeExample;
+import com.ssm.service.TblsongTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +22,9 @@ import com.ssm.service.TblsongService;
 @RequestMapping("/tblsong")  
 public class TblsongController {
 	@Autowired
-    private TblsongService tblsongService;  
+    private TblsongService tblsongService;
+	@Autowired
+	private TblsongTypeService tblsongTypeService;
 	
 	@RequestMapping(value = "/list")
 	public String list(HttpServletRequest request, Model model) {
@@ -50,6 +55,16 @@ public class TblsongController {
 
 	@RequestMapping(value = "/toAdd")
 	public String toAdd(HttpServletRequest request, Model model) {
+		//查询歌曲类型
+
+		SongTypeExample example = new SongTypeExample();
+     	example.setOrderByClause(" createdate desc ");
+		int count = tblsongTypeService.countByExample(example);
+		Page page = new Page(count, "");
+		example.setPageStart(page.getStart());
+		example.setPageSize(count);
+		List<SongType> list = tblsongTypeService.selectByExamplePage(example);
+		model.addAttribute("songTypelist", list);
 		return "tblsongadd";
 	}
 	
